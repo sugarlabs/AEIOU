@@ -25,14 +25,21 @@
        style="stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;display:inline" />
   </g>
   <text
-     x="6.15962"
-     y="36.948204"
      style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill-opacity:1;stroke:none;font-family:Sans">
     <tspan
-       x="6.15962"
-       y="36.948204"
+       x="11.5"
+       y="24"
        id="tspan8"
        fill="&stroke_color;" stroke="none;"
-       style="font-size:24px;">abc</tspan>
+       style="font-size:20px;">a ei</tspan>
+  </text>
+  <text
+     style="font-size:24px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill-opacity:1;stroke:none;font-family:Sans">
+    <tspan
+       x="12.5"
+       y="39"
+       id="tspan8"
+       fill="&stroke_color;" stroke="none;"
+       style="font-size:20px;">o u</tspan>
   </text>
 </svg>
