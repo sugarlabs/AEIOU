@@ -55,7 +55,7 @@ class AEIOU(activity.Activity):
 
     def __init__(self, handle):
         ''' Initialize the toolbars and the reading board '''
-        super(IKnowMyABCs, self).__init__(handle)
+        super(AEIOU, self).__init__(handle)
 
         self.datapath = get_path(activity, 'instance')
 
