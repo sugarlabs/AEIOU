@@ -1,0 +1,11 @@
+# Copyright (c) 2011 Walter Bender y Pacita Pena,,,,,,
+# This work is licensed under a Creative Commons,,,,,,
+# Attribution-NonCommercial 3.0 Unported License.,,,,,,
+# These words represent Nivel 1 in Spanish,,,,,,
+# Use () for highlighted letter in phrase.,,,,,,
+# letter, phrase, RGB color, color name, vowel or consonant, sound file,
+A, (a)ve, #FFFFFF, ave.png, ave.ogg, a.ogg
+E, (e)l(e)fant(e), #70A9CE, elefante.png, elefante.ogg, e.ogg
+I, (i)gles(i)a, #DE1C23, iglesia.png, iglesia.ogg, i.ogg
+O, (o)s(o), #A4221E, oso.png, oso.ogg, o.ogg
+U, (u)va, #00A000, uva.png, uva.ogg, u.ogg
