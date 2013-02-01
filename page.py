@@ -24,10 +24,11 @@ from utils.play_audio import play_audio_from_file
 import logging
 _logger = logging.getLogger('aeiou-activity')
 
+from sugar3 import profile
 from sugar3.graphics import style
 GRID_CELL_SIZE = style.GRID_CELL_SIZE
 
-from genpieces import generate_card
+from genpieces import generate_card, genblank
 from utils.sprites import Sprites, Sprite
 
 
@@ -46,6 +47,8 @@ class Page():
         self._lessons_path = lessons_path
         self._images_path = images_path
         self._sounds_path = sounds_path
+
+        self._colors = profile.get_color().to_string().split(',')
 
         self._card_data = []
         self._color_data = []
@@ -86,7 +89,37 @@ class Page():
         self.timeout = None
 
         self.load_level(os.path.join(self._lessons_path, 'alphabet' + '.csv'))
+
+        self._my_canvas = Sprite(
+            self._sprites, 0, 0, svg_str_to_pixbuf(genblank(
+                    self._width, self._height, (self._colors[0],
+                                                self._colors[0]))))
+        self._my_canvas.type = 'background'
+
+        self._smile = Sprite(self._sprites,
+                             int(self._width / 4),
+                             int(self._height / 4),
+                             GdkPixbuf.Pixbuf.new_from_file_at_size(
+                os.path.join(self._activity.activity_path,
+                             'images', 'correct.png'),
+                int(self._width / 2),
+                int(self._height / 2)))
+
+        self._frown = Sprite(self._sprites,
+                             int(self._width / 4),
+                             int(self._height / 4),
+                             GdkPixbuf.Pixbuf.new_from_file_at_size(
+                os.path.join(self._activity.activity_path,
+                             'images', 'wrong.png'),
+                int(self._width / 2),
+                int(self._height / 2)))
+
         self.new_page()
+
+    def _hide_feedback(self):
+        if hasattr(self, '_smile'):
+            self._smile.hide()
+            self._frown.hide()
 
     def new_page(self, cardtype='alpha'):
         ''' Load a page of cards '''
@@ -105,6 +138,7 @@ class Page():
         if len(self._pictures) > 0:
             for card in self._pictures:
                 card.hide()
+        self._hide_feedback()
 
     def _image_cards(self):
         x = self._grid_x_offset + GUTTER
@@ -138,13 +172,15 @@ class Page():
             if type(self._color_data[self.current_card][0]) == type([]):
                 stroke = self._test_for_stroke()
                 top = svg_str_to_pixbuf(generate_card(
-                        string=card[0].lower(),
+                        string='%s%s' % (
+                            card[0].upper(), card[0].lower()),
                         colors=[self._color_data[self.current_card][0][0],
                                 '#FFFFFF'],
                         scale=self._scale,
                         center=True))
                 bot = svg_str_to_pixbuf(generate_card(
-                        string=card[0].lower(),
+                        string='%s%s' % (
+                            card[0].upper(), card[0].lower()),
                         colors=[self._color_data[self.current_card][0][1],
                                 '#FFFFFF'],
                         scale=self._scale,
@@ -160,7 +196,8 @@ class Page():
                 stroke = self._test_for_stroke()
                 self._cards.append(Sprite(self._sprites, x, y,
                                           svg_str_to_pixbuf(generate_card(
-                                string=card[0].lower(),
+                                string='%s%s' % (
+                                    card[0].upper(), card[0].lower()),
                                 colors=[self._color_data[self.current_card][0],
                                         '#FFFFFF'],
                                 stroke=stroke,
@@ -186,10 +223,18 @@ class Page():
         self.timeout = GObject.timeout_add(1000, self._play_target_sound)
 
     def _play_target_sound(self):
-        if self._activity.mode == 'find by letter':
+        _logger.debug(self._activity.mode)
+        if self._activity.mode in ['letter', 'find by letter']:
             play_audio_from_file(os.path.join(
                     self._sounds_path,
                     self._media_data[self.target][1]))
+        elif self._activity.mode == 'picture':
+            play_audio_from_file(os.path.join(
+                    self._sounds_path,
+                    self._media_data[self.target][1]))
+            GObject.timeout_add(1000, play_audio_from_file, os.path.join(
+                    self._sounds_path,
+                    self._media_data[self.target][0]))
         else:
             play_audio_from_file(os.path.join(
                     self._sounds_path,
@@ -217,26 +262,37 @@ class Page():
         elif spr in self._pictures:
             self.current_card = self._pictures.index(spr)
         if self._activity.mode in ['letter', 'picture']:
-            play_audio_from_file(os.path.join(
-                    self._sounds_path,
-                    self._media_data[self.current_card][1]))
+            self.target = self.current_card
+            self._play_target_sound()
         elif self._activity.mode in ['find by letter', 'find by word']:
             if self.current_card == self.target:
                 self._activity.status.set_text(_('Very good!'))
                 self._play(True)
                 if self.timeout is not None:
                     GObject.source_remove(self.timeout)
-                self.timeout = GObject.timeout_add(1000, self.new_target)
+                self.timeout = GObject.timeout_add(1000, self._correct_feedback)
             else:
-                self._play(False)
                 self._activity.status.set_text(_('Please try again.'))
-                self._play_target_sound()
+                self._play(False)
+                if self.timeout is not None:
+                    GObject.source_remove(self.timeout)
+                self.timeout = GObject.timeout_add(1000, self._wrong_feedback)
+
+    def _correct_feedback(self):
+        self._hide_feedback()
+        self.new_target()
+
+    def _wrong_feedback(self):
+        self._hide_feedback()
+        self._play_target_sound()
 
     def _play(self, great):
         if great:
-                play_audio_from_file(os.getcwd() + '/sounds/great.ogg')
+            self._smile.set_layer(1000)
+            play_audio_from_file(os.getcwd() + '/sounds/great.ogg')
         else:
-                play_audio_from_file(os.getcwd() + '/sounds/bad.ogg')
+            self._frown.set_layer(1000)
+            play_audio_from_file(os.getcwd() + '/sounds/bad.ogg')
 
     def _keypress_cb(self, area, event):
         ''' No keyboard shortcuts at the moment. Perhaps jump to the page
@@ -314,6 +370,7 @@ class Page():
 
 def svg_str_to_pixbuf(svg_string):
     ''' Load pixbuf from SVG string. '''
+    _logger.debug(svg_string)
     pl = GdkPixbuf.PixbufLoader.new_with_type('svg')
     if type(svg_string) == unicode:
         svg_string = svg_string.encode('ascii', 'replace')
