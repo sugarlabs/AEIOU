@@ -14,7 +14,6 @@
 
 from gi.repository import Gtk, Gdk, GObject, GdkPixbuf
 import os
-import codecs
 from random import uniform
 
 from gettext import gettext as _
@@ -89,8 +88,6 @@ class Page():
         self._release = None
         self.timeout = None
 
-        self.load_level(os.path.join(self._lessons_path, 'alphabet' + '.csv'))
-
         self._my_canvas = Sprite(
             self._sprites, 0, 0, svg_str_to_pixbuf(genblank(
                     self._width, self._height, (self._colors[0],
@@ -115,6 +112,7 @@ class Page():
                 int(self._width / 2),
                 int(self._height / 2)))
 
+        self.load_level(os.path.join(self._lessons_path, 'alphabet' + '.csv'))
         self.new_page()
 
     def _hide_feedback(self):
@@ -264,6 +262,10 @@ class Page():
 
         x, y = map(int, event.get_coords())
         spr = self._sprites.find_sprite((x, y))
+        if spr is None:
+            return
+        if spr.type == 'background':
+            return
         if spr in self._cards:
             self.current_card = self._cards.index(spr)
         elif spr in self._pictures:
@@ -296,10 +298,10 @@ class Page():
     def _play(self, great):
         if great:
             self._smile.set_layer(1000)
-            play_audio_from_file(os.getcwd() + '/sounds/great.ogg')
+            # play_audio_from_file(os.getcwd() + '/sounds/great.ogg')
         else:
             self._frown.set_layer(1000)
-            play_audio_from_file(os.getcwd() + '/sounds/bad.ogg')
+            # play_audio_from_file(os.getcwd() + '/sounds/bad.ogg')
 
     def _keypress_cb(self, area, event):
         ''' No keyboard shortcuts at the moment. Perhaps jump to the page
@@ -349,7 +351,7 @@ class Page():
         self._color_data = []
         self._image_data = []
         self._media_data = []  # (image sound, letter sound)
-        f = codecs.open(path, encoding='utf-8')
+        f = open(path)
         for line in f:
             if len(line) > 0 and line[0] not in '#\n':
                 words = line.split(', ')
@@ -379,8 +381,6 @@ def svg_str_to_pixbuf(svg_string):
     ''' Load pixbuf from SVG string. '''
     _logger.debug(svg_string)
     pl = GdkPixbuf.PixbufLoader.new_with_type('svg')
-    if type(svg_string) == unicode:
-        svg_string = svg_string.encode('ascii', 'replace')
     pl.write(svg_string)
     pl.close()
     return pl.get_pixbuf()
