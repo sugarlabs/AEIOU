@@ -63,7 +63,7 @@ def check_output(command, warning):
         try:
             output = subprocess.check_output(command)
         except subprocess.CalledProcessError:
-            log.warning(warning)
+            _logger.warning(warning)
             return None
     else:
         import commands
