@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2012 Walter Bender
+#Copyright (c) 2012,2013 Walter Bender
 #Copyright (c) 2013 Ignacio Rodríguez
 
 # This program is free software; you can redistribute it and/or modify
@@ -55,6 +55,7 @@ class Page():
         self._image_data = []
         self._media_data = []  # (image sound, letter sound)
         self._word_data = []
+        self._deja_vu = []
 
         # Starting from command line
         if self._activity is None:
@@ -218,6 +219,12 @@ class Page():
         self._activity.status.set_text(
             _('Click on the card that corresponds to the sound.'))
         self.target = int(uniform(0, len(self._cards)))
+        # Don't repeat
+        while self.target in self._deja_vu:
+            self.target = int(uniform(0, len(self._cards)))
+        self._deja_vu.append(self.target)
+        if len(self._deja_vu) == len(self._cards):
+            self._deja_vu = []
         if self.timeout is not None:
             GObject.source_remove(self.timeout)
         self.timeout = GObject.timeout_add(1000, self._play_target_sound)
