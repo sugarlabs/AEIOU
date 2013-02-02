@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#Copyright (c) 2012 Walter Bender
+#Copyright (c) 2012,13 Walter Bender
 #Copyright (c) 2013 Ignacio Rodríguez
 
 # This program is free software; you can redistribute it and/or modify
@@ -43,8 +43,6 @@ class AEIOU(activity.Activity):
         ''' Initialize the toolbars and the reading board '''
         super(AEIOU, self).__init__(handle)
 
-        self.datapath = get_path(activity, 'instance')
-
         if 'LANG' in os.environ:
             language = os.environ['LANG'][0:2]
         elif 'LANGUAGE' in os.environ:
@@ -55,13 +53,7 @@ class AEIOU(activity.Activity):
         # FIXME: find some reasonable default situation
         language = 'es'
 
-        home_path = os.path.expanduser('~')
-        if os.path.exists(os.path.join(home_path, 'Activities',
-                                       'AEIOU.activity')):
-            self.activity_path = os.path.join(home_path, 'Activities',
-                                              'AEIOU.activity')
-        else:
-            self.activity_path = os.path.abspath('.')
+        self.activity_path = activity.get_bundle_path()
 
         self._lessons_path = os.path.join(self.activity_path,
                                           'lessons', language)
