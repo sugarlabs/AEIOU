@@ -1,8 +1,8 @@
 [Activity]
 name = AEIOU
-activity_version = 5
+activity_version = 6
 license = GPLv3
-bundle_id = org.sugarlabs.AEIOU
+bundle_id = org.sugarlabs.AEIOU.NI
 exec = sugar-activity aeiou.AEIOU
 icon = activity-aeiou
 show_launcher = yes
