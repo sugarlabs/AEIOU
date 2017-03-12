@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-28 11:07-0500\n"
-"PO-Revision-Date: 2016-11-26 00:47+0000\n"
+"PO-Revision-Date: 2017-03-12 01:00+0000\n"
 "Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: gug\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1480121257.000000\n"
+"X-POOTLE-MTIME: 1489280453.000000\n"
 
 #: activity/activity.info:2
 msgid "I Know My ABCs"
@@ -37,16 +37,16 @@ msgstr "Retopa tai ijojava taipundive"
 
 #: IKnowMyABCs.py:169 IKnowMyABCs.py:177
 msgid "Click on a card to hear a sound."
-msgstr "Rejapo Click kuatiañe'epe ha rehendu mbaéicha ipu"
+msgstr "Rejapo Click kuatiañe'epe ha rehendu mbaéicha ipu."
 
 #: page.py:184
 msgid "Click on the card that corresponds to the sound."
-msgstr "Rejapo Click kuatiañe'epe ijojava ipundive"
+msgstr "Rejapo Click kuatiañe'epe ijojava ipundive."
 
 #: page.py:224
 msgid "Very good!"
-msgstr "Oĩ porã"
+msgstr "¡Oĩ porã!"
 
 #: page.py:227
 msgid "Please try again."
-msgstr "Ikaturãmo, rejapomi jey"
+msgstr "Ikaturãmo, rejapomi jey."
