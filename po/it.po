@@ -8,45 +8,45 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-28 11:07-0500\n"
-"PO-Revision-Date: 2016-05-28 01:28+0000\n"
-"Last-Translator: mimibg <emilymariebg@amschool.org>\n"
+"PO-Revision-Date: 2017-01-18 15:44+0000\n"
+"Last-Translator: Elias <elias.secchi@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: es\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1464398892.000000\n"
+"X-POOTLE-MTIME: 1484754244.000000\n"
 
 #: activity/activity.info:2
 msgid "I Know My ABCs"
-msgstr "Conozco mis ABC's"
+msgstr ""
 
 #: IKnowMyABCs.py:127
 msgid "Page"
-msgstr "Página"
+msgstr "Pagina"
 
 #: IKnowMyABCs.py:138 IKnowMyABCs.py:140
 msgid "listen to the letter names"
-msgstr "escucha el nombre de las letras"
+msgstr "Ascolta i nomi delle lettere"
 
 #: IKnowMyABCs.py:149 IKnowMyABCs.py:153
 msgid "find the letter that corresponds to the sound"
-msgstr "encuentra la letra que se corresponde con el sonido"
+msgstr "trova la lettera che corrisponde al suono"
 
 #: IKnowMyABCs.py:169 IKnowMyABCs.py:177
 msgid "Click on a card to hear a sound."
-msgstr "Haz click en una carta para escuchar un sonido."
+msgstr "Fai click su una carta per sentire un suono"
 
 #: page.py:184
 msgid "Click on the card that corresponds to the sound."
-msgstr "Haz click en la carta que se corresponde con el sonido."
+msgstr "Fai click sulla carta che corrisponde al suono"
 
 #: page.py:224
 msgid "Very good!"
-msgstr "¡Muy bien!"
+msgstr "Ottimo!"
 
 #: page.py:227
 msgid "Please try again."
-msgstr "Por favor, intenta de nuevo."
+msgstr "Riprova."
