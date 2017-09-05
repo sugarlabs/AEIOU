@@ -8,45 +8,46 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-28 11:07-0500\n"
-"PO-Revision-Date: 2017-03-25 23:33+0000\n"
-"Last-Translator: Aputsiak Niels <aj@isit.gl>\n"
+"PO-Revision-Date: 2017-08-10 03:45+0000\n"
+"Last-Translator: Svetlana <svetlana@members.fsf.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1490484812.000000\n"
+"X-POOTLE-MTIME: 1502336708.000000\n"
 
 #: activity/activity.info:2
 msgid "I Know My ABCs"
-msgstr "Jeg Kan Min ABC"
+msgstr ""
 
 #: IKnowMyABCs.py:127
 msgid "Page"
-msgstr "Side"
+msgstr "Страница"
 
 #: IKnowMyABCs.py:138 IKnowMyABCs.py:140
 msgid "listen to the letter names"
-msgstr "lyt til bogstavernes navne"
+msgstr "слушайте названия букв"
 
 #: IKnowMyABCs.py:149 IKnowMyABCs.py:153
 msgid "find the letter that corresponds to the sound"
-msgstr "find det bogstav der hører til lyden"
+msgstr "найдите букву, которая соответствует звуку"
 
 #: IKnowMyABCs.py:169 IKnowMyABCs.py:177
 msgid "Click on a card to hear a sound."
-msgstr "Klik på et kort for at høre en lyd."
+msgstr "Нажмите на карточку, чтобы услышать звук."
 
 #: page.py:184
 msgid "Click on the card that corresponds to the sound."
-msgstr "Klik på det kort der hører til lyden."
+msgstr "Нажмите на карточку, которая соответствует звуку."
 
 #: page.py:224
 msgid "Very good!"
-msgstr "Virkelig godt!"
+msgstr "Очень хорошо!"
 
 #: page.py:227
 msgid "Please try again."
-msgstr "Prøv igen."
+msgstr "Попробуйте ещё раз."
