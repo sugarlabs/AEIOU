@@ -16,6 +16,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import logging
+from Queue import Queue
 import gi
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst
@@ -37,12 +38,12 @@ class Aplay:
         bus.connect('message::error', self._on_message_error)
 
         self._pipeline = pipeline
-        self._queue = []
+        self._queue = Queue()
 
     def _dequeue(self):
-        if len(self._queue) == 0:
+        if self._queue.empty():
             return
-        name = self._queue.pop()
+        name = self._queue.get()
         self._pipeline.props.uri = 'file://' + name
         self._pipeline.set_state(Gst.State.PLAYING)
 
@@ -58,7 +59,7 @@ class Aplay:
         self._dequeue()
 
     def play(self, name):
-        self._queue.append(name)
+        self._queue.put(name)
         if self._pipeline.get_state(Gst.CLOCK_TIME_NONE)[1] == Gst.State.NULL:
             self._dequeue()
 
