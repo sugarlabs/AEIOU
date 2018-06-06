@@ -1,4 +1,5 @@
 # Copyright (C) 2009, Aleksey Lim
+# Copyright (C) 2018, James Cameron <quozl@laptop.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,6 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import logging
 import gi
 gi.require_version('Gst', '1.0')
 from gi.repository import Gst
@@ -22,36 +24,47 @@ from gi.repository import Gst
 Gst.init(None)
 
 
-def aplay(name):
-    global player
+class Aplay:
+    def __init__(self):
+        pipeline = Gst.ElementFactory.make('playbin', 'playbin')
+        pipeline.set_property(
+            "video-sink",
+            Gst.ElementFactory.make('fakesink', 'fakesink'))
 
-    player.set_state(Gst.State.NULL)
-    player.props.uri = 'file://' + name
-    player.set_state(Gst.State.PLAYING)
+        bus = pipeline.get_bus()
+        bus.add_signal_watch()
+        bus.connect('message::eos', self._on_message_eos)
+        bus.connect('message::error', self._on_message_error)
+
+        self._pipeline = pipeline
+        self._queue = []
+
+    def _dequeue(self):
+        if len(self._queue) == 0:
+            return
+        name = self._queue.pop()
+        self._pipeline.props.uri = 'file://' + name
+        self._pipeline.set_state(Gst.State.PLAYING)
+
+    def _on_message_eos(self, bus, message):
+        if self._pipeline:
+            self._pipeline.set_state(Gst.State.NULL)
+            self._dequeue()
+
+    def _on_message_error(self, bus, message):
+        err, debug = message.parse_error()
+        logging.error('%s %s', err, debug)
+        self._pipeline.set_state(Gst.State.NULL)
+        self._dequeue()
+
+    def play(self, name):
+        self._queue.append(name)
+        if self._pipeline.get_state(Gst.CLOCK_TIME_NONE)[1] == Gst.State.NULL:
+            self._dequeue()
+
+    def close(self):
+        self._pipeline.set_state(Gst.State.NULL)
+        self._pipeline = None
 
 
-def astop():
-    global player, fakesink
-
-    player.set_state(Gst.State.NULL)
-    player = fakesink = None
-
-
-def eos_cb(bus, message):
-    player.set_state(Gst.State.NULL)
-
-
-def error_cb(bus, message):
-    err, debug = message.parse_error()
-    print('%s %s' % (err, debug))
-    player.set_state(Gst.State.NULL)
-
-
-player = Gst.ElementFactory.make('playbin', 'playbin')
-player.set_property(
-    "video-sink",
-    Gst.ElementFactory.make('fakesink', 'fakesink'))
-
-player.get_bus().add_signal_watch()
-player.get_bus().connect('message::eos', eos_cb)
-player.get_bus().connect('message::error', error_cb)
+aplay = Aplay()

@@ -231,17 +231,16 @@ class Page():
     def _play_target_sound(self):
         _logger.debug(self._activity.mode)
         if self._activity.mode in ['letter', 'find by letter']:
-            aplay(os.path.join(self._sounds_path,
-                                  self._media_data[self.target][1]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][1]))
         elif self._activity.mode == 'picture':
-            aplay(os.path.join(
-                    self._sounds_path,
-                    self._media_data[self.target][1]))
-            GObject.timeout_add(1000, aplay, os.path.join(self._sounds_path,
-                    self._media_data[self.target][0]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][1]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][0]))
         else:
-            aplay(os.path.join(self._sounds_path,
-                    self._media_data[self.target][0]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][0]))
         self.timeout = None
 
     def _button_press_cb(self, win, event):

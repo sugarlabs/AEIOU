@@ -26,7 +26,7 @@ import os.path
 
 from page import Page
 from utils.toolbar_utils import separator_factory, label_factory, radio_factory
-from utils.aplay import astop
+from utils.aplay import aplay
 
 import logging
 _logger = logging.getLogger('aeiou-activity')
@@ -171,7 +171,7 @@ class AEIOU(activity.Activity):
         self.metadata['page'] = str(self._page.current_card)
 
     def close(self, **kwargs):
-        astop()
+        aplay.close()
         activity.Activity.close(self, **kwargs)
 
 
