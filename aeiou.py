@@ -26,6 +26,7 @@ import os.path
 
 from page import Page
 from utils.toolbar_utils import separator_factory, label_factory, radio_factory
+from utils.aplay import astop
 
 import logging
 _logger = logging.getLogger('aeiou-activity')
@@ -168,6 +169,10 @@ class AEIOU(activity.Activity):
         if not hasattr(self, '_page'):
             return
         self.metadata['page'] = str(self._page.current_card)
+
+    def close(self, **kwargs):
+        astop()
+        activity.Activity.close(self, **kwargs)
 
 
 def get_path(activity, subpath):
