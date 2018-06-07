@@ -7,4 +7,6 @@ exec = sugar-activity aeiou.AEIOU
 icon = activity-aeiou
 show_launcher = yes
 summary = learn the vowel sounds
-category = language
+tags = language
+repository = https://github.com/sugarlabs/AEIOU/
+url = https://help.sugarlabs.org/en/aeiou.html
