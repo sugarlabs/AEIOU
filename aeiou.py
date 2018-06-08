@@ -12,7 +12,8 @@
 # Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 
-
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 import sys
@@ -25,6 +26,7 @@ import os.path
 
 from page import Page
 from utils.toolbar_utils import separator_factory, label_factory, radio_factory
+from utils.aplay import aplay
 
 import logging
 _logger = logging.getLogger('aeiou-activity')
@@ -167,6 +169,10 @@ class AEIOU(activity.Activity):
         if not hasattr(self, '_page'):
             return
         self.metadata['page'] = str(self._page.current_card)
+
+    def close(self, **kwargs):
+        aplay.close()
+        activity.Activity.close(self, **kwargs)
 
 
 def get_path(activity, subpath):

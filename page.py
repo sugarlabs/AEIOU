@@ -18,7 +18,7 @@ from random import uniform
 
 from gettext import gettext as _
 
-from utils.play_audio import play_audio_from_file
+from utils.aplay import aplay
 
 import logging
 _logger = logging.getLogger('aeiou-activity')
@@ -231,20 +231,16 @@ class Page():
     def _play_target_sound(self):
         _logger.debug(self._activity.mode)
         if self._activity.mode in ['letter', 'find by letter']:
-            play_audio_from_file(os.path.join(
-                    self._sounds_path,
-                    self._media_data[self.target][1]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][1]))
         elif self._activity.mode == 'picture':
-            play_audio_from_file(os.path.join(
-                    self._sounds_path,
-                    self._media_data[self.target][1]))
-            GObject.timeout_add(1000, play_audio_from_file, os.path.join(
-                    self._sounds_path,
-                    self._media_data[self.target][0]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][1]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][0]))
         else:
-            play_audio_from_file(os.path.join(
-                    self._sounds_path,
-                    self._media_data[self.target][0]))
+            aplay.play(os.path.join(self._sounds_path,
+                                        self._media_data[self.target][0]))
         self.timeout = None
 
     def _button_press_cb(self, win, event):
@@ -299,10 +295,10 @@ class Page():
     def _play(self, great):
         if great:
             self._smile.set_layer(1000)
-            # play_audio_from_file(os.getcwd() + '/sounds/great.ogg')
+            # aplay(os.getcwd() + '/sounds/great.ogg')
         else:
             self._frown.set_layer(1000)
-            # play_audio_from_file(os.getcwd() + '/sounds/bad.ogg')
+            # aplay(os.getcwd() + '/sounds/bad.ogg')
 
     def _keypress_cb(self, area, event):
         ''' No keyboard shortcuts at the moment. Perhaps jump to the page
@@ -365,7 +361,7 @@ class Page():
                     self._color_data.append(
                         [words[2]])
                 self._image_data.append(words[3])
-                self._media_data.append((words[4], words[5]))
+                self._media_data.append((words[4], words[5].strip()))
         f.close()
 
         self._clear_all()

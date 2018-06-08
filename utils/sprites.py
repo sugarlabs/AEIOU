@@ -77,8 +77,10 @@ def svg_str_to_pixbuf(svg_string):
 '''
 
 import gi
+gi.require_version('PangoCairo', '1.0')
 from gi.repository import Gtk, GdkPixbuf, Gdk
 from gi.repository import Pango, PangoCairo
+import cairo
 
 
 class Sprites:
@@ -86,6 +88,7 @@ class Sprites:
 
     def __init__(self, widget):
         ''' Initialize an empty array of sprites '''
+        self.cr = None
         self.widget = widget
         self.list = []
 
@@ -187,7 +190,7 @@ class Sprite:
         self.images[i] = image
         self._dx[i] = dx
         self._dy[i] = dy
-        if isinstance(self.images[i], GdkPixbuf.Pixbuf):
+        if hasattr(self.images[i], 'get_width'):
             w = self.images[i].get_width()
             h = self.images[i].get_height()
         else:
@@ -333,6 +336,14 @@ class Sprite:
                 Gdk.cairo_set_source_pixbuf(cr, img,
                                             self.rect[0] + self._dx[i],
                                             self.rect[1] + self._dy[i])
+                cr.rectangle(self.rect[0] + self._dx[i],
+                             self.rect[1] + self._dy[i],
+                             self.rect[2],
+                             self.rect[3])
+                cr.fill()
+            elif type(img) == cairo.ImageSurface:
+                cr.set_source_surface(img, self.rect[0] + self._dx[i],
+                                      self.rect[1] + self._dy[i])
                 cr.rectangle(self.rect[0] + self._dx[i],
                              self.rect[1] + self._dy[i],
                              self.rect[2],
