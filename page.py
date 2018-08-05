@@ -377,6 +377,7 @@ class Page():
 def svg_str_to_pixbuf(svg_string):
     ''' Load pixbuf from SVG string. '''
     pl = GdkPixbuf.PixbufLoader.new_with_type('svg')
+    pl.encode()
     pl.write(svg_string)
     pl.close()
     return pl.get_pixbuf()
