@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-09 11:50-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-03-30 03:53+0000\n"
+"Last-Translator: NF <rkavt@smartprojects.ge>\n"
+"Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
+"sugar-activities/aeiou/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: activity/activity.info:2
 msgid "AEIOU"
@@ -26,15 +29,15 @@ msgstr ""
 
 #: page.py:218
 msgid "Click on the card that corresponds to the sound."
-msgstr ""
+msgstr "დააწკაპუნეთ ხმის შესაბამის ბარათზე."
 
 #: page.py:279
 msgid "Very good!"
-msgstr ""
+msgstr "ძალიან კარგი!"
 
 #: page.py:285
 msgid "Please try again."
-msgstr ""
+msgstr "თავიდან სცადეთ."
 
 #: aeiou.py:103 aeiou.py:105
 msgid "Listen to the letter names."
@@ -46,4 +49,20 @@ msgstr ""
 
 #: aeiou.py:129 aeiou.py:137
 msgid "Click on a card to hear a sound."
-msgstr ""
+msgstr "დააწკაპუნეთ ბარათზე ხმის გასაგებად."
+
+#: activity/activity.info:2
+msgid "I Know My ABCs"
+msgstr "მე ვიცი ჩემი ანბანი"
+
+#: IKnowMyABCs.py:127
+msgid "Page"
+msgstr "გვერდი"
+
+#: IKnowMyABCs.py:138 IKnowMyABCs.py:140
+msgid "listen to the letter names"
+msgstr "უსმინეთ ასოს სახელებს"
+
+#: IKnowMyABCs.py:149 IKnowMyABCs.py:153
+msgid "find the letter that corresponds to the sound"
+msgstr "იპოვეთ ასო, რომელიც ხმას შეესაბამება"
