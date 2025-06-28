@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-09 11:50-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hus\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: activity/activity.info:2
+msgid "AEIOU"
+msgstr ""
+
+#: activity/activity.info:3
+msgid "learn the vowel sounds"
+msgstr ""
+
+#: page.py:218
+msgid "Click on the card that corresponds to the sound."
+msgstr ""
+
+#: page.py:279
+msgid "Very good!"
+msgstr ""
+
+#: page.py:285
+msgid "Please try again."
+msgstr ""
+
+#: aeiou.py:103 aeiou.py:105
+msgid "Listen to the letter names."
+msgstr ""
+
+#: aeiou.py:110 aeiou.py:114
+msgid "Find the letter that corresponds to the sound."
+msgstr ""
+
+#: aeiou.py:129 aeiou.py:137
+msgid "Click on a card to hear a sound."
+msgstr ""
